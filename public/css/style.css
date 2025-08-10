@@ -1,0 +1,44 @@
+/* .banner {
+  background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5)), url(../storage/gambar/banner3.avif);
+  background-size: contain;
+  padding-top: 50px;
+  height: 60vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 40px;
+  color: #e3f2fd;
+  font-family: "Offside", sans-serif;
+} */
+
+.resize {
+  resize: none;
+}
+
+.carousel-item>img {
+  width: 320px;
+  height: 520px;
+}
+
+.divider:after,
+.divider:before {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #eee;
+}
+
+.h-custom {
+  height: calc(100% - 73px);
+}
+
+@media (max-width: 450px) {
+  .h-custom {
+    height: 100%;
+  }
+}
+
+a {
+  text-decoration: none;
+}
+
