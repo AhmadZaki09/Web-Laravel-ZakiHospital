@@ -47,8 +47,11 @@
                             <h5 class="card-title">Specialis {{ $dokter->specialis }}</h5>
                             <h5 class="card-title ">Hari Beroperasi :
                             </h5>
-                            @if($dokter->days->count() < 1) ----
+
+                            @if ($dokter->days->count() < 1)
+                                ----
                             @endif
+
                             @foreach ($dokter->days as $day)
                                 <span class="bg-secondary rounded text-white">{{ $day->hari }}</span>
                             @endforeach
@@ -85,7 +88,7 @@
 
             <div class="d-flex justify-content-end">
                 <a href="{{ url('/dokter/' . $dokter->id . '/delete') }}" class="btn btn-primary">Hapus Dokter</a>
-                {{-- <a href="{{ url('/komentar/'. $dokter->id) }}" class="btn btn-primary">Komentar</a> --}}
+                <a href="{{ url('/dokter/'. $dokter->id . '/edit') }}" class="btn btn-primary">Edit Dokter</a>
             </div>
 
             <hr>

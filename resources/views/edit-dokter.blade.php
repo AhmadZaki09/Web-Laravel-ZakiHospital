@@ -24,13 +24,14 @@
             </div>
         @endif
 
-        
-        <form action="{{ url('/simpan-dokter') }}" method="POST" enctype="multipart/form-data">
+        {{-- nama --}}
+        <form action="{{ url('/dokter/' . $dokter->id . '/update') }}" method="POST" enctype="multipart/form-data">
             @csrf
-            {{-- nama --}}
+            @method('PATCH')
+
             <div data-mdb-input-init class="form-outline mb-3">
                 <label class="form-label" for="nama">Nama lengkap Dokter :</label>
-                <input type="text" name="nama" class="form-control border border-5"
+                <input type="text" name="nama" value="{{ $dokter->nama }}" class="form-control border border-5"
                     placeholder="Nama Lengkap Dokter" />
             </div>
 
@@ -39,19 +40,32 @@
                 <label for="specialis" class="form-label">Specialis Dokter :</label>
                 <select name="specialis" class="form-select border border-5" required>
                     <option value="">-- Pilih --</option>
-                    <option value="mata">Spesialis Mata</option>
-                    <option value="telinga">Spesialis Telinga</option>
-                    <option value="gigi">Spesialis Gigi</option>
-                    <option value="wajah">Spesialis Wajah</option>
+                    <option value="mata" {{ $dokter->specialis == 'mata' ? 'selected' : '' }}>Spesialis Mata</option>
+                    <option value="telinga" {{ $dokter->specialis == 'telinga' ? 'selected' : '' }}>Spesialis Telinga
+                    </option>
+                    <option value="gigi" {{ $dokter->specialis == 'gigi' ? 'selected' : '' }}>Spesialis Gigi</option>
+                    <option value="wajah" {{ $dokter->specialis == 'wajah' ? 'selected' : '' }}>Spesialis Wajah
+                    </option>
                 </select>
             </div>
+
 
             {{-- Jadwal --}}
             <div data-mdb-input-init class="form-outline mb-3">
                 <label class="form-label" for="hari">Jadwal Dokter :</label>
-                @foreach ($days as $key => $day )
+
+                @if ($dokter->days->count() < 1)
+                    ----
+                @endif
+
+                @foreach ($dokter->days as $day)
+                    <span class="bg-secondary rounded text-white">{{ $day->hari }}</span>
+                @endforeach
+
+                @foreach ($days as $key => $day)
                     <div>
-                        <input type="checkbox" name="hari[]" id="hari{{ $key }}" value="{{ $day->id }}" class="border border-5" />
+                        <input type="checkbox" name="hari[]" id="hari{{ $key }}" value="{{ $day->id }}"
+                            class="border border-5" />
                         <label class="form-check-label" for="hari{{ $key }}">
                             {{ $day->hari }}
                         </label>
@@ -62,7 +76,15 @@
             {{-- gambar --}}
             <div data-mdb-input-init class="form-outline mb-3">
                 <label class="form-label" for="gambar">Gambar Dokter :</label>
-                <input type="file" name="gambar" class="form-control border border-5" placeholder="Gambar Dokter" />
+                <div>
+                    <img style="width: 200px" src="{{ asset('gambar/' . $dokter->gambar) }}"
+                        class="img-fluid rounded-start mb-3" alt="...">
+                </div>
+                <!-- Simpan nama file lama -->
+                <input type="hidden" name="gambar_lama" value="{{ $dokter->gambar }}">
+                
+                <input type="file" name="gambar" value="{{ $dokter->gambar }}" class="form-control border border-5"
+                    placeholder="Gambar Dokter" />
             </div>
 
             {{-- tombol --}}

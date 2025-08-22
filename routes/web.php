@@ -28,8 +28,11 @@ Route::get('/dokter', [dokterController::class, 'show'])->name('dokter');
 Route::get('/tambah-dokter', [dokterController::class, 'tambah']);
 Route::post('/simpan-dokter', [dokterController::class, 'simpan']);
 Route::get('/dokter/{id}/delete', [dokterController::class, 'delete']);
+Route::get('/dokter/{id}/edit', [dokterController::class, 'edit']);
+Route::patch('/dokter/{id}/update', [dokterController::class, 'update']);
 
 Route::post('/komentar/{dokter_id}', [dokterController::class, 'komentar']);
+
 
 
 

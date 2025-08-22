@@ -51,8 +51,7 @@ class Hospital extends Controller
 
         $name = $request->name;
         $password = $request->password;
-        $kode = $request->admin;
-
+        
         $user = User::where('name', $name)->first();
 
         if ($user && Hash::check($password, $user->password)) {
@@ -153,7 +152,7 @@ class Hospital extends Controller
             abort(404);
         }
         $dokters = Dokter::all();
-        return view('data-pasien-edit',  compact('dokters'), ['pasien' => $pasien]);
+        return view('data-pasien-edit', compact('dokters'), ['pasien' => $pasien]);
     }
 
     function updatepasien(Request $request, $id)
